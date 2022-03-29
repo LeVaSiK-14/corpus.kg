@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+
+  postgresdb:
+    container_name: shop_db
+    build:
+      context: ./docker/postgres
+      dockerfile: ./Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=shoppassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - my_network
+
+  web:
+    container_name: shop_app
+    build:
+      context: ./docker/backend
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./media/:/media
+      - ./static/:/static
+      - ./:/app
+    depends_on:
+      - postgresdb
+    networks:
+      - my_network
+    
+
+  nginx:
+    container_name: shop_nginx
+    build:
+      context: ./docker/nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./static/:/static
+      - ./media/:/media
+      - ./:/app
+    depends_on:
+      - postgresdb
+      - web
+    networks:
+      - my_network
+
+
+volumes:
+  media:
+  static:
+  pgdata:
+
+networks:
+  my_network:
