@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  postgresdb:
+  db:
     container_name: shop_db
     build:
       context: ./docker/postgres
@@ -19,16 +19,17 @@ services:
   web:
     container_name: shop_app
     build:
-      context: ./docker/backend
-      dockerfile: ./Dockerfile
+      context: .
     volumes:
       - ./media/:/media
       - ./static/:/static
       - ./:/app
+    entrypoint: ./wsgi-entrypoint.sh
     depends_on:
-      - postgresdb
+      - db
     networks:
       - my_network
+    
     
 
   nginx:
@@ -43,7 +44,7 @@ services:
       - ./media/:/media
       - ./:/app
     depends_on:
-      - postgresdb
+      - db
       - web
     networks:
       - my_network
