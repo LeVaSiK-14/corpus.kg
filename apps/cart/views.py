@@ -5,10 +5,9 @@ from rest_framework.permissions import IsAuthenticated
 from apps.cart.serializers import (
     UserSerializer,
     OrderSerializer,
-    OrderItemSerializer
 )
 
-from apps.cart.models import Order, OrderItem
+from apps.cart.models import Order
 
 User = get_user_model()
 

@@ -32,22 +32,22 @@ services:
     
     
 
-  nginx:
-    container_name: shop_nginx
-    build:
-      context: ./docker/nginx
-      dockerfile: ./Dockerfile
-    ports:
-      - "80:80"
-    volumes:
-      - ./static/:/static
-      - ./media/:/media
-      - ./:/app
-    depends_on:
-      - db
-      - web
-    networks:
-      - my_network
+  # nginx:
+  #   container_name: shop_nginx
+  #   build:
+  #     context: ./docker/nginx
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./static/:/static
+  #     - ./media/:/media
+  #     - ./:/app
+  #   depends_on:
+  #     - db
+  #     - web
+  #   networks:
+  #     - my_network
 
 
 volumes:

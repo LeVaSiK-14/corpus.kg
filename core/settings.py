@@ -86,23 +86,23 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "shopdb",
-        "USER": "shopadmin",
-        "PASSWORD": "shoppassword",
-        "HOST": 'db',
-        "PORT": 5432,
-    }
-}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "shopdb",
+#         "USER": "shopadmin",
+#         "PASSWORD": "shoppassword",
+#         "HOST": 'db',
+#         "PORT": 5432,
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -147,11 +147,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://127.0.0.1:5500',
+    'http://127.0.0.1:3002',
+    'http://127.0.0.1:3001',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
 ]
 
 REST_FRAMEWORK = {
@@ -162,8 +163,6 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': ["django_filters.rest_framework.DjangoFilterBackend"],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    
-
 }
 
 

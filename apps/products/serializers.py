@@ -5,16 +5,26 @@ from .models import (
 )
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'image')
-
-
 class SubcategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Subcategory
-        fields = ('id', 'category', 'name', 'image')
+        fields = ('id', 'name', 'image')
+        
+        
+class CategorySerializer(serializers.ModelSerializer):
+    sub_categories = SubcategorySerializer(read_only=True, many=True)
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'image', 'sub_categories')
+        
+        
+class CategoryListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'image', )
+
+
+
 
 
 class ProductCreateSerializer(serializers.ModelSerializer):
@@ -23,7 +33,7 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'subcategory', 'prod_set', 'name', 
             'vendor_code', 'color', 'fabric', 'price', 
-            'discount', 'sale', 'hit', 'date_added', 
+            'discount', 'sale', 'hit', 'is_new', 'date_added', 
             'image', 'image2', 'image3', 'image4', 
             'image5', 'image6', "description",
         )
@@ -58,7 +68,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = (
             "id", "subcategory", "prod_set", "name",
             "vendor_code", "color", "fabric", "price",
-            "discount", "sale", "hit", "date_added",
+            "discount", "sale", "hit", "is_new", "date_added",
             "image", "image2", "image3", "image4",
             "image5", "image6", "description", 
             "date_added", "discount_price", 

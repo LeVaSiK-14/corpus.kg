@@ -14,7 +14,7 @@ class Category(models.Model):
 
 
 class Subcategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='sub_categories')
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='subcategories/images', blank=True, null=True)
     
@@ -95,6 +95,7 @@ class Product(models.Model):
     hit = models.BooleanField(
         default=False, verbose_name="Хит Продаж"
     )
+    is_new = models.BooleanField(default=False, verbose_name='Новый', null=True)
     image = models.ImageField(
         upload_to="products/images"
     )
