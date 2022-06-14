@@ -1,4 +1,5 @@
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets
+from rest_framework import filters as rest_filter
 from django_filters import rest_framework as filters
 from apps.products.serializers import(
     ProductSerializer, CategorySerializer,
@@ -25,9 +26,10 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
 
 class ProductModelViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, rest_filter.SearchFilter)
     pagination_class = CustomPagination
     filterset_fields = ('subcategory', 'prod_set', 'price', 'fabric', 'is_new')
+    search_fields = ['name', ]
     
     def get_serializer_class(self):
         if self.action == 'create':
