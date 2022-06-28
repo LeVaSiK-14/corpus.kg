@@ -28,7 +28,7 @@ class ProductModelViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     filter_backends = (filters.DjangoFilterBackend, rest_filter.SearchFilter)
     pagination_class = CustomPagination
-    filterset_fields = ('subcategory', 'prod_set', 'price', 'fabric', 'is_new')
+    filterset_fields = ('hit', 'subcategory', 'prod_set', 'price', 'fabric', 'is_new')
     search_fields = ['name', ]
     
     def get_serializer_class(self):
