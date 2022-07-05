@@ -1,8 +1,20 @@
 from rest_framework import serializers
 from .models import (
     Category, Colors, Fabric,
-    Product, Set, Subcategory
+    Product, Set, Subcategory,
+    Stock, GoodCredit
 )
+
+class StockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = '__all__'
+        
+
+class GoodCreditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoodCredit
+        fields = '__all__'
 
 
 class SubcategorySerializer(serializers.ModelSerializer):

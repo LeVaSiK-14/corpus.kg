@@ -6,12 +6,23 @@ from apps.products.serializers import(
     SubcategorySerializer, SetSerializer,
     FabricSerializer, ColorsSerializer,
     ProductCreateSerializer, CategoryListSerializer,
+    StockSerializer, GoodCreditSerializer
 )
 from apps.products.models import (
     Product, Category, Subcategory,
-    Set, Fabric, Colors,
+    Set, Fabric, Colors, Stock, GoodCredit
 )
 from core.paginations import CustomPagination
+
+
+class StockView(viewsets.ReadOnlyModelViewSet):
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
+    
+    
+class GoodCreditView(viewsets.ReadOnlyModelViewSet):
+    queryset = GoodCredit.objects.all()
+    serializer_class = GoodCreditSerializer
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):

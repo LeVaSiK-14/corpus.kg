@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 
 
@@ -130,3 +131,41 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class GoodCredit(models.Model):
+    title = models.CharField(max_length=127, verbose_name='Название товара')
+    description = models.TextField(verbose_name='Описание товара')
+    image = models.ImageField(upload_to='goo_on_credit/images/', verbose_name='Картинка товара')
+    credit_amount = models.IntegerField(default=0, verbose_name='Размер кредита')
+    date_end = models.DateTimeField(auto_now=True, verbose_name='Срок действия кредита')
+    
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'goodcredit'
+        verbose_name = 'Товар в кредит'
+        verbose_name_plural = 'Товары в кредит'
+        
+        
+class Stock(models.Model):
+    title = models.CharField(max_length=127, verbose_name='Название товара')
+    description = models.TextField(verbose_name='Описание товара')
+    image = models.ImageField(upload_to='stock/images/', verbose_name='Картинка товара')
+    stock_amount = models.IntegerField(default=0, verbose_name='Размер акции')
+    date_end = models.DateTimeField(auto_now=True, verbose_name='Срок действия акции')
+    
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'stock'
+        verbose_name = 'Товар по акции'
+        verbose_name_plural = 'Товары по акции'
+        
+# поле скидки int
+# описание
+# дата до какого числа
+# название
+# картинка
